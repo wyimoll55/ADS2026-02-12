@@ -40,11 +40,13 @@ public class C_GetInversions {
         int result = instance.calc(stream);
         System.out.print(result);
     }
-
+/*считает количество инверсий в массиве*/
     private long mergeSort(int[] arr, int[] temp, int left, int right) {
         if (left >= right) {
             return 0;
         }
+        /*Алгоритм делит массив на две части,
+         рекурсивно сортирует их и считает инверсии*/
         int mid = left + (right - left) / 2;
         long invCount = 0;
         invCount += mergeSort(arr, temp, left, mid);
@@ -52,7 +54,7 @@ public class C_GetInversions {
         invCount += merge(arr, temp, left, mid, right);
         return invCount;
     }
-
+/*модифицированную сортировку слиянием*/
     private long merge(int[] arr, int[] temp, int left, int mid, int right) {
         int i = left;
         int j = mid + 1;
@@ -65,6 +67,8 @@ public class C_GetInversions {
             } else {
                 temp[k++] = arr[j++];
                 invCount += (mid - i + 1);
+                /*Если элемент из правой половины меньше
+                 элемента из левой — это инверсия.*/
             }
         }
 
@@ -75,7 +79,7 @@ public class C_GetInversions {
         while (j <= right) {
             temp[k++] = arr[j++];
         }
-
+/*После слияния копирую временный массив обратно*/
         for (int p = left; p <= right; p++) {
             arr[p] = temp[p];
         }
@@ -86,6 +90,7 @@ public class C_GetInversions {
     int calc(InputStream stream) throws FileNotFoundException {
         Scanner scanner = new Scanner(stream);
         int n = scanner.nextInt();
+        /*счет массив.*/
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();

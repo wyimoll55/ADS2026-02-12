@@ -33,18 +33,22 @@ public class B_MergeSort {
         if (left >= right) {
             return;
         }
+        /*Алгоритм делит массив на две части,
+        рекурсивно сортирует их и затем сливает.
+         */
         int mid = left + (right - left) / 2;
         mergeSort(arr, left, mid);
         mergeSort(arr, mid + 1, right);
         merge(arr, left, mid, right);
     }
-
+/*сортировку слиянием для одномерного массива*/
     private void merge(int[] arr, int left, int mid, int right) {
         int[] temp = new int[right - left + 1];
         int i = left;
         int j = mid + 1;
         int k = 0;
-
+/*временный массив и поэлементно
+выбираю меньший элемент из двух половин.*/
         while (i <= mid && j <= right) {
             if (arr[i] <= arr[j]) {
                 temp[k++] = arr[i++];
@@ -52,7 +56,8 @@ public class B_MergeSort {
                 temp[k++] = arr[j++];
             }
         }
-
+/*Если в одной из половин
+остались элементы — допис*/
         while (i <= mid) {
             temp[k++] = arr[i++];
         }
@@ -60,7 +65,7 @@ public class B_MergeSort {
         while (j <= right) {
             temp[k++] = arr[j++];
         }
-
+/*Перенос отсортированные данные обратно в исходный массив*/
         for (int p = 0; p < temp.length; p++) {
             arr[left + p] = temp[p];
         }
@@ -68,13 +73,13 @@ public class B_MergeSort {
 
     int[] getMergeSort(InputStream stream) throws FileNotFoundException {
         Scanner scanner = new Scanner(stream);
-
+/*счет массива*/
         int n = scanner.nextInt();
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
-
+/*сортировка слияния*/
         mergeSort(a, 0, n - 1);
 
         return a;

@@ -35,19 +35,19 @@ public class A_BinaryFind {
         }
     }
 
-    private int binarySearch(int[] arr, int value) {
+    private int binarySearch(int[] arr, int value) { /*поиск элементов в отсортированном массиве с помощью бинарного поиска*/
         int left = 0;
         int right = arr.length - 1;
 
         while (left <= right) {
-            int mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2; /*бинорный поиск*/
 
             if (arr[mid] == value) {
                 return mid + 1;
             } else if (arr[mid] < value) {
-                left = mid + 1;
+                left = mid + 1; /*элемент найден возр индекс добавляя+1*/
             } else {
-                right = mid - 1;
+                right = mid - 1; /*если нет*/
             }
         }
 
@@ -57,9 +57,10 @@ public class A_BinaryFind {
     public int[] findIndex(InputStream stream) throws FileNotFoundException {
         Scanner scanner = new Scanner(stream);
 
-        int n = scanner.nextInt();
+        int n = scanner.nextInt(); /*счет массив и запросы*/
         int[] a = new int[n];
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) { /*для каждого числа бинарный поиск,
+         который работает за логарифмическое время.*/
             a[i - 1] = scanner.nextInt();
         }
 
@@ -67,7 +68,7 @@ public class A_BinaryFind {
         int[] result = new int[k];
         for (int i = 0; i < k; i++) {
             int value = scanner.nextInt();
-            result[i] = binarySearch(a, value);
+            result[i] = binarySearch(a, value);/*его исполнение*/
         }
         return result;
     }
